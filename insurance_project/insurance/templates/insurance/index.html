@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence pojištění</title>  
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+ 
+
+</head>
+<body>
+    <h1>EVIDENCE POJIŠTĚNÍ</h1>
+    <ul>
+        <li><a href="{% url 'add_insured_with_insurance' %}">Přidat pojištěnce s pojištěním</a></li>
+        <li><a href="{% url 'insured_list' %}">Zobrazit seznam pojištěných</a></li>
+        <li><a href="{% url 'search_insured' %}">Vyhledat pojištěnce</a></li>
+
+    </ul>
+    <footer>
+        <hr>
+        <p>&copy; 2025 Evidence pojištění</p>
+    </footer>
+</body>
+</html>
