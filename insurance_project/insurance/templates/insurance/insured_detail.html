@@ -25,7 +25,7 @@
                         <br><em>Podpojištění:</em>
                         <ul>
                             {% for sub in insurance.subinsurance_set.all %}
-                                <li>{{ sub.name }}: {{ sub.price }} Kč</li>
+                                <li>{{ sub.name }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %} <br>
@@ -39,7 +39,7 @@
     <!-- Nové odkazy -->
     <p>
         <a href="{% url 'add_insurance' person.id %}">Přidat pojištění</a> |
-        <a href="{% url 'delete_insured' person.id %}">Odstranit pojištěného</a> |
+        <a href="{% url 'delete_insured_with_password' person.id %}">Odstranit pojištěného</a> |
         <a href="{% url 'edit_insured' person.id %}">Upravit údaje</a>
     </p>    
 

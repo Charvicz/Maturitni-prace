@@ -1,0 +1,148 @@
+/* Reset základních stylů */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tělo stránky */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 20px;
+}
+
+/* Kontejner pro obsah */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+header h1, footer p {
+  margin: 0;
+}
+
+/* Navigace */
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hlavní obsah */
+main {
+  margin-top: 20px;
+}
+
+/* Seznamy a položky */
+ul {
+  list-style: none;
+  margin: 10px 0;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
+/* Fieldset a legend */
+fieldset {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+/* Odkazy */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Tlačítka */
+button {
+  background: #0066cc;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #005bb5;
+}
+
+/* Formuláře a vstupy */
+form {
+  margin-top: 15px;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;       /* Umožní, aby se šířka přizpůsobila obsahu */
+  width: auto;   
+  font-size: 1em;
+}
+
+input[type="date"],
+select {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;       /* Umožní, aby se šířka přizpůsobila obsahu */
+  width: auto;   
+  font-size: 1em;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Přidané styly pro skupiny formulářových prvků */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Chybové zprávy */
+.error {
+  color: #e74c3c;
+  font-size: 0.9em;
+  margin-top: 5px;
+}

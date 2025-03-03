@@ -3,6 +3,7 @@ from .forms import InsuredPersonForm, SubInsuranceForm, InsuredForm, InsuranceFo
 from .models import InsuredPerson, SubInsurance, Insurance
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 def index(request):
@@ -157,12 +158,26 @@ def insured_detail(request, person_id):
     person = get_object_or_404(InsuredPerson, id=person_id)
     return render(request, 'insurance/insured_detail.html', {'person': person})
 
-def delete_insured(request, person_id):
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def delete_insured_with_password(request, person_id):
     person = get_object_or_404(InsuredPerson, id=person_id)
+    error = None
+
     if request.method == 'POST':
-        person.delete()  # Díky CASCADE se smažou i jeho pojištění a podpojištění
-        return redirect('insured_list')
-    return render(request, 'insurance/delete_insured_confirm.html', {'person': person})
+        entered_password = request.POST.get('password', '')
+        # Ověříme heslo přihlášeného superuživatele
+        if request.user.check_password(entered_password):
+            person.delete()
+            return redirect('insured_list')
+        else:
+            error = "Zadané heslo je nesprávné."
+
+    return render(request, 'insurance/delete_insured_confirm.html', {
+        'person': person,
+        'error': error,
+    })
+
 
 def edit_insured(request, person_id):
     person = get_object_or_404(InsuredPerson, id=person_id)

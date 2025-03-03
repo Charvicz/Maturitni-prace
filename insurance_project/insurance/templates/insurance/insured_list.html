@@ -34,7 +34,7 @@
                             <br>Podpojištění:
                             <ul>
                                 {% for sub in insurance.subinsurance_set.all %}
-                                <li>{{ sub.name }}: {{ sub.price }} Kč</li> 
+                                <li>{{ sub.name }}</li> 
                                 {% endfor %}
                             </ul><br>
                             <a href="{% url 'delete_insurance' insurance.id %}" 
@@ -52,7 +52,7 @@
             <!-- Odkaz pro přidání nového pojištění pro tuto osobu -->
             <p >
                 <a href="{% url 'add_insurance' person.id %}">Přidat pojištění</a>
-                <a href="{% url 'delete_insured' person.id %}">Odstranit pojištěného</a>
+                <a href="{% url 'delete_insured_with_password' person.id %}">Odstranit pojištěného</a>
                 <a href="{% url 'edit_insured' person.id %}">Upravit údaje</a>
 
             </p>  <!-- Tohle je správně -->

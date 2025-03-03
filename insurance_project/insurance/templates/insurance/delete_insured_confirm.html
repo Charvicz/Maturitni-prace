@@ -9,12 +9,20 @@
 </head>
 <body>
     <h2>Potvrzení smazání pojištěného</h2>
-    <p>Opravdu chcete odstranit pojištěného: <br> Jméno a příjmení: {{ person.first_name }} {{ person.last_name }} <br> Datum narození: {{person.birth_date}} (ve věku:{{person.age}} let)?</p>
+    <p>Opravdu chcete smazat pojištěného: <strong>{{ person.first_name }} {{ person.last_name }}</strong>?</p>
+    
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Ano, odstranit</button>
-        <a href="{% url 'insured_detail' person.id %}">Ne, vrátit se zpět</a>
+        <label for="password">Zadejte heslo pro potvrzení:</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit">Smazat</button>
     </form>
+    
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    
+    <p><a href="{% url 'insured_detail' person.id %}">Zrušit a vrátit se zpět</a></p>
     <footer>
         <hr>
         <p>&copy; 2025 Evidence pojištění</p>
