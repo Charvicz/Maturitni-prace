@@ -68,12 +68,12 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# 🔥 Oprava STATICFILES nastavení
-STATIC_URL = "/static/"
+STATIC_URL = '/static/'
 
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]  # Vývojový režim
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # Produkční režim
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
+
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+MEDIA_URL='/media/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

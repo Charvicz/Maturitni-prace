@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import edit_insured, delete_insurance
 from .views import delete_insured_with_password
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -14,6 +15,7 @@ urlpatterns = [
     path('edit_insured/<int:person_id>/', edit_insured, name='edit_insured'),
     path('delete_insurance/<int:insurance_id>/', delete_insurance, name='delete_insurance'),
     path('delete_insured_with_password/<int:person_id>/', delete_insured_with_password, name='delete_insured_with_password'),
+    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
 
 
 ]
