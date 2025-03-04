@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .views import edit_insured, delete_insurance
+from .views import delete_insured_with_password
 
 
 urlpatterns = [
@@ -12,8 +13,7 @@ urlpatterns = [
     path('insured/<int:person_id>/', views.insured_detail, name='insured_detail'),
     path('edit_insured/<int:person_id>/', edit_insured, name='edit_insured'),
     path('delete_insurance/<int:insurance_id>/', delete_insurance, name='delete_insurance'),
-    path('delete_insured_with_password/<int:person_id>/', 
-         views.delete_insured_with_password, 
-         name='delete_insured_with_password'),
+    path('delete_insured_with_password/<int:person_id>/', delete_insured_with_password, name='delete_insured_with_password'),
+
 
 ]
