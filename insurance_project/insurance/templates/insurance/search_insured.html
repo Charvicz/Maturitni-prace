@@ -7,7 +7,25 @@
     <title>Vyhledat pojištěnce</title>
 </head>
 <body>
-    <h2>Vyhledat pojištěnce</h2>
+    <div class="navigacni_menu">
+        <form action="{% url 'index' %}" method="get">
+            <button type="submit">Domů</button>
+        </form>
+        
+        <form action="{% url 'add_insured_with_insurance' %}" method="get">
+            <button type="submit">Přidat pojištěnce</button>
+        </form>
+
+        <form action="{% url 'insured_list' %}" method="get">
+            <button type="submit">Seznam pojištěných</button>
+        </form>
+    
+        <form action="{% url 'search_insured' %}" method="get">
+            <button type="submit">Vyhledat pojištěnce</button>
+        </form>
+    </div>
+    <br>
+    <h1>Vyhledat pojištěnce</h1>
     <form method="get" action="{% url 'search_insured' %}">
         <input type="text" name="first_name" placeholder="Jméno" value="{{ first_name }}">
         <input type="text" name="last_name" placeholder="Příjmení" value="{{ last_name }}">
@@ -15,28 +33,29 @@
 
     </form>
 
-    {% if results != None %}
+    {% if results is not None %}
+    <div class="vysledky-vyhledavani">
         {% if results %}
             <h3>Výsledky vyhledávání:</h3>
             <ul>
                 {% for person in results %}
                     <li>
                         <a href="{% url 'insured_detail' person.id %}">
-                            {{ person.first_name }} {{ person.last_name }} <br> Tel. číslo: {{ person.phone }} <br> Datum narození: {{ person.birth_date }} 
+                            <strong>{{ person.first_name }} {{ person.last_name }}</strong><br>
+                            Tel. číslo: {{ person.phone }}<br>
+                            Datum narození: {{ person.birth_date }}
                         </a>
                     </li>
-                    <br>
                 {% endfor %}
-               
             </ul>
         {% else %}
             <p>Nebyli nalezeni žádní pojištění podle zadaných kritérií.</p>
         {% endif %}
-    {% endif %}
+    </div>
+{% endif %}
 
-    <p><a href="{% url 'index' %}">Zpět do hlavního menu</a></p>
+
     <footer>
-        <hr>
         <p>&copy; 2025 Evidence pojištění</p>
     </footer>
 </body>

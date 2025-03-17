@@ -22,6 +22,12 @@ class InsuredPersonForm(forms.ModelForm):
     class Meta:
         model = InsuredPerson
         fields = ['first_name', 'last_name', 'birth_date', 'phone']
+        labels = {
+            'first_name': 'Jméno',
+            'last_name': 'Příjmení',
+            'birth_date': 'Datum narození',
+            'phone': 'Telefon',
+        }
         widgets = {
             'birth_date': SelectDateWidget(
                 years=range(1900, datetime.date.today().year + 1),
@@ -45,7 +51,7 @@ class SubInsuranceForm(forms.ModelForm):
         model = SubInsurance
         fields = ['name', 'price']
         
-        
+
 class InsuranceForm(forms.ModelForm):
     # Pole pro podpojistění – bude renderováno jako sady zaškrtávacích políček
     sub_insurances = forms.MultipleChoiceField(

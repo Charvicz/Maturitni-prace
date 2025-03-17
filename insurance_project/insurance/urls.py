@@ -7,7 +7,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('insured_list/', views.insured_list, name='insured_list'),
+    path('insured_list/', views.insured_list, name='Seznam pojištěných'),
     path('add_insurance/<int:insured_person_id>/', views.add_insurance, name='add_insurance'),
     path('add_insured_with_insurance/', views.add_insured_with_subinsurance, name='add_insured_with_insurance'),
     path('search_insured/', views.search_insured, name='search_insured'),

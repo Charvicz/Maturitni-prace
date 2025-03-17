@@ -7,7 +7,7 @@ class InsuredPerson(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     birth_date = models.DateField(null=True, blank=True) # Datum narození místo věku
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=9)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

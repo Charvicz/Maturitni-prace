@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-# Create your views here.
 def index(request):
     return render(request, "insurance/index.html")
 
@@ -26,17 +25,24 @@ def insured_list(request):
     return render(request, 'insurance/insured_list.html', {'persons': persons})
 
 # Funkce pro přidání pojištění
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
+from .forms import InsuranceForm
+from .models import InsuredPerson, Insurance, SubInsurance
+
 def add_insurance(request, insured_person_id):
     insured_person = get_object_or_404(InsuredPerson, id=insured_person_id)
     
     if request.method == 'POST':
         form = InsuranceForm(request.POST)
         if form.is_valid():
+            # Uložení pojištění a přiřazení pojištěnému
             insurance = form.save(commit=False)
             insurance.insured_person = insured_person
-            insurance.save()
+            insurance.save()    
             
             # Automatické vytvoření podpojištění podle typu pojištění
+            sub_insurances = []
             if insurance.insurance_type == 'life':
                 sub_insurances = [
                     ('Úrazové pojištění', 200),
@@ -55,19 +61,15 @@ def add_insurance(request, insured_person_id):
                     ('Pojištění odpovědnosti', 180),
                     ('Pojištění proti požáru', 350),
                 ]
-            else:
-                sub_insurances = []
-                
+            
+            # Pokud existují podpojištění, přidáme je
             for name, price in sub_insurances:
                 SubInsurance.objects.create(insurance=insurance, name=name, price=price)
                 
-            # Získáme URL, odkud uživatel přišel
-            previous_page = request.META.get('HTTP_REFERER')
-            if previous_page:
-                return HttpResponseRedirect(previous_page)
-            else:
-                # fallback na detail pojištěného, pokud není referer dostupný
-                return redirect('insured_detail', person_id=insured_person.id)
+            # Přesměrování na předchozí stránku, pokud je k dispozici, nebo na detail pojištěného
+            previous_page = request.META.get('HTTP_REFERER', 'insured_detail')
+            return HttpResponseRedirect(previous_page)
+            
     else:
         form = InsuranceForm()
     
@@ -158,25 +160,26 @@ def insured_detail(request, person_id):
     person = get_object_or_404(InsuredPerson, id=person_id)
     return render(request, 'insurance/insured_detail.html', {'person': person})
 
-@login_required
-@user_passes_test(lambda u: u.is_superuser)
 def delete_insured_with_password(request, person_id):
     person = get_object_or_404(InsuredPerson, id=person_id)
     error = None
-
+    # Nastav si heslo, které musí být zadáno – ideálně si to dej do settings nebo získávej bezpečně
+    ADMIN_DELETE_PASSWORD = 'tajneheslo'
+    
     if request.method == 'POST':
         entered_password = request.POST.get('password', '')
-        # Ověříme heslo přihlášeného superuživatele
-        if request.user.check_password(entered_password):
+        if entered_password == ADMIN_DELETE_PASSWORD:
             person.delete()
+            # Po smazání přesměrujeme na stránku se seznamem pojištěných
             return redirect('insured_list')
         else:
             error = "Zadané heslo je nesprávné."
-
+    
     return render(request, 'insurance/delete_insured_confirm.html', {
         'person': person,
         'error': error,
     })
+
 
 
 def edit_insured(request, person_id):

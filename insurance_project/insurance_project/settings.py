@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-vz1+pe%yg023smd0r%!1i(xg(j0%*gphix+i9v5kkwjg15cz@q"
 
-DEBUG = True  # Ujisti se, že v produkci nastavíš False
+DEBUG = True 
 
 ALLOWED_HOSTS = []
 
@@ -63,17 +63,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
-USE_I18N = True
+LANGUAGE_CODE = 'cs'
+TIME_ZONE = 'Europe/Prague'
+USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
-STATIC_ROOT=os.path.join(BASE_DIR,'static')
-
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = '/moje_prihlaseni/'
