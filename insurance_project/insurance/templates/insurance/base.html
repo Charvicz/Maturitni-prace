@@ -33,7 +33,12 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Evidence pojištění</p>
+        <a>Tento web byl vytvořen jako součást maturitní práce na téma evidence pojištění. Kód je dostupný na GitHubu</a>
+        <p><a href="https://github.com/Charvicz" target="_blank">GitHub</a> | <a href="mailto:ondrej.charvat05@gmail.com?subject=Nahlášení%20chyby">Kontakt</a> | <a href="https://forms.gle/c2eCSgmGKtm7CakBA" target="_blank">Nahlásit chybu</a></p>
+        <p>© <span id="year"></span> Ondřej Charvát</p>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
     </footer>
 </body>
 </html>
